@@ -44,7 +44,7 @@ fun DrawerBody(
     itemTextStyle: TextStyle = TextStyle(fontSize = 18.sp),
     onItemClick: (MenuItem) -> Unit
 ) {
-    LazyColumn() {
+    LazyColumn {
         items(items) { item ->
             Row(
                 modifier = Modifier
