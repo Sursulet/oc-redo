@@ -1,4 +1,4 @@
-package com.sursulet.realestatemanager.presentation.add_edit
+package com.sursulet.realestatemanager.presentation.add_edit_estate
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

@@ -1,5 +1,6 @@
 package com.sursulet.realestatemanager.presentation.detail.components
 
+import android.graphics.Bitmap
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -10,15 +11,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.sursulet.realestatemanager.R
+import com.sursulet.realestatemanager.data.local.Photo
 
 @Composable
 fun PhotoCard(
-    modifier : Modifier
+    modifier: Modifier = Modifier,
+    photo: Photo
 ) {
     Card(
         modifier = modifier
@@ -26,9 +28,9 @@ fun PhotoCard(
         shape = RoundedCornerShape(0.dp),
         elevation = 5.dp
     ) {
-        Box(modifier = modifier.height(100.dp)){
+        Box(modifier = modifier.height(100.dp)) {
             Image(
-                painter = painterResource(id = R.drawable.ic_launcher_background),
+                bitmap = photo.image.asImageBitmap(),//painterResource(id = R.drawable.ic_launcher_background),
                 contentDescription = "",
                 contentScale = ContentScale.Crop
             )
@@ -53,5 +55,11 @@ fun PhotoCard(
 @Preview(showBackground = true)
 @Composable
 fun PhotoCardPreview() {
-    PhotoCard(modifier = Modifier)
+    PhotoCard(
+        photo = Photo(
+            id = 1, estateId = 1,
+            title = "Room",
+            image = Bitmap.createBitmap(200, 200, Bitmap.Config.ARGB_8888)
+        )
+    )
 }

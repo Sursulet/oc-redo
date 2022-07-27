@@ -14,6 +14,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.time.LocalDate
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
@@ -47,27 +48,59 @@ class EstateDaoTest {
             id = 1,
             type = "",
             price = 1f,
-            surface = "",
+            surface = 27f,
             rooms = 1,
             description = "",
-            photos = "",
-            address = "",
+            address = Address("","","","","",""),
             nearby = "",
-            status = "",
-            created = "",
-            saleTimestamp = "",
+            isAvailable = true,
+            created = LocalDate.now(),
+            saleTimestamp = null,
             agent = ""
         )
-        dao.insertEstate(item)
+        dao.insert(item)
 
-        val list = dao.getAllEstates().first()
+        val list = dao.getEstates().first()
 
         assertThat(list.size).isEqualTo(1)
         assertThat(list).contains(item)
     }
 
     @Test
-    fun getEstates() = runTest {  }
+    fun getEstates() = runTest {
+        val item = Estate(
+            type = "",
+            price = 1f,
+            surface = 27f,
+            rooms = 1,
+            description = "",
+            address = Address("","","","","",""),
+            nearby = "",
+            isAvailable = true,
+            created = LocalDate.now(),
+            saleTimestamp = null,
+            agent = ""
+        )
+        val item1 = Estate(
+            type = "",
+            price = 1f,
+            surface = 27f,
+            rooms = 1,
+            description = "",
+            address = Address("","","","","",""),
+            nearby = "",
+            isAvailable = true,
+            created = LocalDate.now(),
+            saleTimestamp = null,
+            agent = ""
+        )
+
+        dao.insert(item)
+        dao.insert(item1)
+
+        val list = dao.getEstates().first()
+        assertThat(list.size).isEqualTo(2)
+    }
 
     @Test
     fun getEstate() = runTest {  }
@@ -78,23 +111,22 @@ class EstateDaoTest {
             id = 1,
             type = "",
             price = 1f,
-            surface = "",
+            surface = 27f,
             rooms = 1,
             description = "",
-            photos = "",
-            address = "",
+            address = Address("","","","","",""),
             nearby = "",
-            status = "",
-            created = "",
-            saleTimestamp = "",
+            isAvailable = true,
+            created = LocalDate.now(),
+            saleTimestamp = null,
             agent = ""
         )
-        dao.insertEstate(item)
+        dao.update(item)
 
         val copy = item.copy(price = 2f)
         dao.update(item)
 
-        val list = dao.getAllEstates().first()
+        val list = dao.getEstates().first()
 
         assertThat(list.size).isEqualTo(1)
         assertThat(list).contains(copy)

@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class Photo(
     @PrimaryKey(autoGenerate = true)
-    val id: Long,
+    val id: Long = 0,
     val estateId: Long,
     var title: String,
     var image: Bitmap

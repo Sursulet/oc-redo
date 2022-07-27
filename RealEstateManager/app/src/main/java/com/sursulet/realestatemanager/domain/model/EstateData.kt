@@ -1,8 +1,11 @@
 package com.sursulet.realestatemanager.domain.model
 
+import android.graphics.Bitmap
+
 data class EstateData(
+    val id: Long,
+    val photo: Bitmap,
     val type: String,
-    val price: Float,
-    val surface: Int,
-    val description: String
+    val city: String,
+    val price: String
 )

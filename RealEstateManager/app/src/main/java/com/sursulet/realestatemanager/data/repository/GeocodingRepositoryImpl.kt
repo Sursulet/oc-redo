@@ -7,7 +7,8 @@ import javax.inject.Inject
 
 class GeocodingRepositoryImpl @Inject constructor(
     private val api: GeocodingApi
-): GeocodingRepository {
+) : GeocodingRepository {
+
     override suspend fun getCoordinates(address: String): Resource<String> {
         return try {
             Resource.Success(
@@ -15,7 +16,7 @@ class GeocodingRepositoryImpl @Inject constructor(
             )
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.Error(e.message ?: "An unknown error occured")
+            Resource.Error(e.message ?: "An unknown error occurred")
         }
     }
 }

@@ -3,12 +3,12 @@ package com.sursulet.realestatemanager.data.local
 import androidx.room.ColumnInfo
 
 data class Address(
-    val street: String?,
-    val extras: String?,
-    val state: String?,
-    val city: String?,
-    @ColumnInfo(name = "post_code") val postCode: String?,
-    val country: String?
+    val street: String? = null,
+    val extras: String? = null,
+    val state: String? = null,
+    val city: String? = null,
+    @ColumnInfo(name = "post_code") val postCode: String? = null,
+    val country: String? = null
 ) {
     //private val stateCode: String = "$state $postCode"
 

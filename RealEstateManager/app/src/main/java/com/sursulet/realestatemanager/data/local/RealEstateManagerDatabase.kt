@@ -5,7 +5,8 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
 @Database(
-    entities = [Estate::class],
+    entities = [Estate::class, Photo::class],
+    views = [EstateItemView::class],
     version = 1,
     exportSchema = false
 )
@@ -13,4 +14,5 @@ import androidx.room.TypeConverters
 abstract class RealEstateManagerDatabase : RoomDatabase() {
 
     abstract fun estateDao(): EstateDao
+    abstract fun photoDao(): PhotoDao
 }

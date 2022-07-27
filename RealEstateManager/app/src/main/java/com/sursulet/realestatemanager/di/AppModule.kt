@@ -27,7 +27,7 @@ object AppModule {
         return Room.databaseBuilder(
             application,
             RealEstateManagerDatabase::class.java,
-            ""
+            "real_estate_manager_db"
         ).build()
     }
 
@@ -35,7 +35,7 @@ object AppModule {
     @Singleton
     fun provideGeocodingApi(): GeocodingApi {
         return Retrofit.Builder()
-            .baseUrl("")
+            .baseUrl("https://maps.googleapis.com/")
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
             .create()
@@ -46,4 +46,7 @@ object AppModule {
     fun provideFusedLocationProviderClient(application: Application): FusedLocationProviderClient {
         return LocationServices.getFusedLocationProviderClient(application)
     }
+
+    @Provides
+    fun provideEstateDao(database: RealEstateManagerDatabase) = database.estateDao()
 }

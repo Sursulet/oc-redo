@@ -4,28 +4,27 @@ import android.graphics.Bitmap
 import com.google.common.truth.Truth
 import io.mockk.MockKAnnotations
 import io.mockk.every
-import io.mockk.impl.annotations.MockK
+import io.mockk.impl.annotations.SpyK
+import io.mockk.mockk
 import org.junit.Before
 import org.junit.Test
 import java.time.LocalDate
 
 class ConvertersTest {
 
-    private lateinit var converters: Converters
-    //@MockK private lateinit var bitmap: Bitmap
-    //private val bitmap: Bitmap = Bitmap.createBitmap(16,16,Bitmap.Config.ARGB_8888)
+    @SpyK
+    lateinit var converters: Converters// = spyk<Converters>()
 
     @Before
     fun setUp() {
         converters = Converters()
-        //bitmap = mockk()//Bitmap.createBitmap(200, 200, Bitmap.Config.ARGB_8888)
         MockKAnnotations.init(this, relaxUnitFun = true)
     }
 
     @Test
     fun shouldBeDate() {
-        val value = LocalDate.parse("2022-07-12")
-        Truth.assertThat(converters.fromString("2022-07-12")).isEqualTo(value)
+        Truth.assertThat(converters.fromString("2022-07-12"))
+            .isEqualTo(LocalDate.parse("2022-07-12"))
     }
 
     @Test
@@ -36,8 +35,12 @@ class ConvertersTest {
 
     @Test
     fun shouldToByteArray() {
-        val bitmap: Bitmap = Bitmap.createBitmap(16,16,Bitmap.Config.ARGB_8888)
+        val bitmap = mockk<Bitmap>()
+        val byteArray = "Bitmap".toByteArray(Charsets.UTF_8)
+
+        every { converters.bitmapToByteArray(bitmap) } returns byteArray
+
         Truth.assertThat(converters.bitmapToByteArray(bitmap))
-            .isEqualTo("Hello".toByteArray(Charsets.UTF_8))
+            .isEqualTo("Bitmap".toByteArray(Charsets.UTF_8))
     }
 }

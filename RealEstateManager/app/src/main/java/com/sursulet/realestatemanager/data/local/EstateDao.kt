@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface EstateDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(estate: Estate)
+    suspend fun insert(estate: Estate): Long
 
     @Update
     suspend fun update(estate: Estate)
@@ -28,4 +28,7 @@ interface EstateDao {
     @Transaction
     @Query("SELECT * FROM estate WHERE id = :id")
     fun getEstateWithPhotosById(id: Long): EstateWithPhotos
+
+    @Query("SELECT * FROM estateitemview")
+    fun getEstateItems(): Flow<List<EstateItemView>>
 }

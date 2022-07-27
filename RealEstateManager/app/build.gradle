@@ -62,6 +62,8 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
 
+    implementation "androidx.compose.material:material-icons-extended:1.1.1"
+
     //Local Unit tests
     testImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
     kaptTest "com.google.dagger:hilt-compiler:$hilt_version"
@@ -108,9 +110,12 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3'
 
     //Maps
-    implementation 'com.google.maps.android:maps-compose:2.5.2'
+    implementation 'com.google.maps.android:maps-compose:2.5.3'
     implementation "com.google.android.gms:play-services-maps:18.1.0"
     implementation "com.google.android.gms:play-services-location:20.0.0"
+
+    //implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.0"
+    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
 }
 
 kapt {

@@ -14,7 +14,7 @@ class Converters {
     }
 
     @TypeConverter
-    fun dateToString(date: LocalDate?): String? = date.toString()
+    fun dateToString(date: LocalDate?): String = date.toString()
 
     @TypeConverter
     fun fromByteArray(value: ByteArray): Bitmap {

@@ -1,0 +1,3 @@
+package com.sursulet.realestatemanager.data.repository
+
+class EstateRepositoryImplTest

@@ -7,7 +7,7 @@ sealed class Screen(val route: String) {
     object MapScreen: Screen("map_screen")
     object LoanScreen: Screen("loan_screen")
 
-    fun withArgs(vararg args: String): String {
+    fun withArgs(vararg args: Long): String {
         return buildString {
             append(route)
             args.forEach { arg ->

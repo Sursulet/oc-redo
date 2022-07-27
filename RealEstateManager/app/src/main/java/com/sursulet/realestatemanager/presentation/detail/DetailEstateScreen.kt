@@ -16,48 +16,80 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.maps.android.compose.GoogleMap
 import com.sursulet.realestatemanager.presentation.detail.components.PhotoCard
 
 @Composable
-fun DetailScreen(string: String?) {
+fun DetailScreen(
+    isCompactedScreen: Boolean = true,
+    id: Long?,
+    viewModel: DetailViewModel = hiltViewModel()
+) {
+    val state = viewModel.state
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(start = 16.dp)
     ) {
-        val gameList = listOf(
-            "Horizon",
-            "Uncharted",
-            "Resident evil",
-            "Red dead redemption",
-            "Grand theft auto",
-            "Assassin's creed",
-            "Battlefield",
-            "Forza horizon"
-        )
+        state.detailData?.let { estate ->
 
-        string?.let { DetailTitle(text = it) }
-        DetailTitle(text = "Media")
-        LazyRow(
-            modifier = Modifier.fillMaxWidth(),
-            //contentPadding = PaddingValues(start = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            items(gameList) {
-                PhotoCard(Modifier)
+            id?.let { DetailTitle(text = it.toString()) }
+            DetailTitle(text = "Media")
+            LazyRow(
+                modifier = Modifier.fillMaxWidth(),
+                //contentPadding = PaddingValues(start = 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(estate.gallery) {
+                    PhotoCard(photo = it)
+                }
             }
-        }
 
-        DetailTitle(text = "Description")
-        Text(
-            text = "Desc",
-            modifier = Modifier.fillMaxWidth()
-        )
+            DetailTitle(text = "Description")
+            Text(
+                text = estate.description,
+                modifier = Modifier.fillMaxWidth()
+            )
 
-        BoxWithConstraints {
-            val x = 600
-            if (x < 700){
-                Column {
+            BoxWithConstraints {
+                if (isCompactedScreen) {
+                    Column {
+                        Row(modifier = Modifier.fillMaxWidth()) {
+                            Column(modifier = Modifier.weight(1f)) {
+                                ProprietyCard(
+                                    Icons.Filled.Settings,
+                                    "Surface",
+                                    estate.surface
+                                )
+                                ProprietyCard(
+                                    Icons.Filled.Home,
+                                    "Number of rooms",
+                                    estate.rooms
+                                )
+                                ProprietyCard(
+                                    Icons.Filled.Home,
+                                    "Number of bathrooms",
+                                    estate.bathrooms
+                                )
+                                ProprietyCard(
+                                    Icons.Rounded.Home,
+                                    "Number of bedrooms",
+                                    estate.bedrooms
+                                )
+                            }
+                            Column(modifier = Modifier.weight(1f)) {
+                                ProprietyCard(
+                                    Icons.Filled.LocationOn,
+                                    "Location",
+                                    estate.address
+                                )
+                            }
+                        }
+                        GoogleMap()
+                    }
+                } else {
                     Row(modifier = Modifier.fillMaxWidth()) {
                         Column(modifier = Modifier.weight(1f)) {
                             ProprietyCard(
@@ -88,46 +120,13 @@ fun DetailScreen(string: String?) {
                                 "78"
                             )
                         }
-                    }
-                    Text("HELLO")
-                }
-            } else {
-                Row(modifier = Modifier.fillMaxWidth()) {
-                    Column(modifier = Modifier.weight(1f)) {
-                        ProprietyCard(
-                            Icons.Filled.Settings,
-                            "Surface",
-                            "56"
-                        )
-                        ProprietyCard(
-                            Icons.Filled.Home,
-                            "Number of rooms",
-                            "56"
-                        )
-                        ProprietyCard(
-                            Icons.Filled.Home,
-                            "Number of bathrooms",
-                            "56"
-                        )
-                        ProprietyCard(
-                            Icons.Rounded.Home,
-                            "Number of bedrooms",
-                            "56"
-                        )
-                    }
-                    Column(modifier = Modifier.weight(1f)) {
-                        ProprietyCard(
-                            Icons.Filled.LocationOn,
-                            "Location",
-                            "78"
-                        )
-                    }
-                    Column(modifier = Modifier.weight(1f)) {
-                        ProprietyCard(
-                            Icons.Filled.LocationOn,
-                            "Location",
-                            "78"
-                        )
+                        Column(modifier = Modifier.weight(1f)) {
+                            ProprietyCard(
+                                Icons.Filled.LocationOn,
+                                "Location",
+                                "78"
+                            )
+                        }
                     }
                 }
             }
@@ -172,5 +171,5 @@ fun ProprietyCard(
 @Preview(showBackground = true)
 @Composable
 fun DetailScreenPreview() {
-    Column(modifier = Modifier.fillMaxSize()) { DetailScreen(null) }
+    Column(modifier = Modifier.fillMaxSize()) { DetailScreen(id = 0L) }
 }
