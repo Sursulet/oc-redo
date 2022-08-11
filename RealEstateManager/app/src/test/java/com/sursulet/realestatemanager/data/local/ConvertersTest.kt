@@ -1,7 +1,7 @@
 package com.sursulet.realestatemanager.data.local
 
 import android.graphics.Bitmap
-import com.google.common.truth.Truth
+import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.SpyK
@@ -22,15 +22,21 @@ class ConvertersTest {
     }
 
     @Test
+    fun `with Null String should returns Null`() {
+        assertThat(converters.fromTimestamp(null))
+            .isEqualTo(null)
+    }
+
+    @Test
     fun shouldBeDate() {
-        Truth.assertThat(converters.fromString("2022-07-12"))
-            .isEqualTo(LocalDate.parse("2022-07-12"))
+        assertThat(converters.fromTimestamp(0L))
+            .isEqualTo(LocalDate.parse("1970-01-01"))
     }
 
     @Test
     fun shouldBeString() {
-        Truth.assertThat(converters.dateToString(LocalDate.parse("2022-07-21")))
-            .isEqualTo("2022-07-21")
+        assertThat(converters.dateToTimestamp(LocalDate.parse("1970-01-01")))
+            .isEqualTo(0L)
     }
 
     @Test
@@ -40,7 +46,7 @@ class ConvertersTest {
 
         every { converters.bitmapToByteArray(bitmap) } returns byteArray
 
-        Truth.assertThat(converters.bitmapToByteArray(bitmap))
+        assertThat(converters.bitmapToByteArray(bitmap))
             .isEqualTo("Bitmap".toByteArray(Charsets.UTF_8))
     }
 }

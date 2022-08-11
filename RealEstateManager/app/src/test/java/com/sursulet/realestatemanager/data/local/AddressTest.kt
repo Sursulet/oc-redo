@@ -15,7 +15,7 @@ class AddressTest {
             extras = "Apt 6/7",
             state = "NY",
             city = "New York",
-            postCode = "10021",
+            zip = "10021",
             country = "UNITED STATES"
         )
     }

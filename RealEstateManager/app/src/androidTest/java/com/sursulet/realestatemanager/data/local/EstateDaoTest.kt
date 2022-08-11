@@ -54,8 +54,8 @@ class EstateDaoTest {
             address = Address("","","","","",""),
             nearby = "",
             isAvailable = true,
-            created = LocalDate.now(),
-            saleTimestamp = null,
+            //created = LocalDate.now(),
+            //saleTimestamp = null,
             agent = ""
         )
         dao.insert(item)
@@ -77,8 +77,8 @@ class EstateDaoTest {
             address = Address("","","","","",""),
             nearby = "",
             isAvailable = true,
-            created = LocalDate.now(),
-            saleTimestamp = null,
+            //created = LocalDate.now(),
+            //saleTimestamp = null,
             agent = ""
         )
         val item1 = Estate(
@@ -90,8 +90,8 @@ class EstateDaoTest {
             address = Address("","","","","",""),
             nearby = "",
             isAvailable = true,
-            created = LocalDate.now(),
-            saleTimestamp = null,
+            //created = LocalDate.now(),
+            //saleTimestamp = null,
             agent = ""
         )
 
@@ -117,8 +117,8 @@ class EstateDaoTest {
             address = Address("","","","","",""),
             nearby = "",
             isAvailable = true,
-            created = LocalDate.now(),
-            saleTimestamp = null,
+            //created = LocalDate.now(),
+            //saleTimestamp = null,
             agent = ""
         )
         dao.update(item)

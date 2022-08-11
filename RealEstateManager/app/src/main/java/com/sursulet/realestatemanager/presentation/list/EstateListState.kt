@@ -1,9 +1,8 @@
 package com.sursulet.realestatemanager.presentation.list
 
-import com.sursulet.realestatemanager.domain.model.EstateData
-
 data class EstateListState(
-    val estates: List<EstateData> = emptyList(),
+    val estates: List<EstateItemUi> = emptyList(),
+    val selected: EstateItemUi? = null,
     val isLoading: Boolean = false,
     val error: String? = null
 )

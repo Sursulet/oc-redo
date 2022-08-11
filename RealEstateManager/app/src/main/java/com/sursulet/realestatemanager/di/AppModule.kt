@@ -47,6 +47,4 @@ object AppModule {
         return LocationServices.getFusedLocationProviderClient(application)
     }
 
-    @Provides
-    fun provideEstateDao(database: RealEstateManagerDatabase) = database.estateDao()
 }

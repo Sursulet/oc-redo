@@ -9,5 +9,8 @@ import androidx.navigation.NavController
 fun MapScreen(navController: NavController) {
     Column {
         Text(text = "Map Screen")
+        Text(text = navController.graph.startDestDisplayName)
+        navController.currentDestination?.let { it.route?.let { it1 -> Text(text = it1) } }
+        navController.currentDestination?.let { Text(text = it.navigatorName) }
     }
 }

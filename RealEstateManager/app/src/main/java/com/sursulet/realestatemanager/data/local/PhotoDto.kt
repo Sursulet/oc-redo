@@ -4,8 +4,8 @@ import android.graphics.Bitmap
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
-data class Photo(
+@Entity(tableName = "photo")
+data class PhotoDto(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val estateId: Long,

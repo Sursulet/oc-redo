@@ -3,14 +3,13 @@ package com.sursulet.realestatemanager.presentation.list
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.sursulet.realestatemanager.domain.utils.Screen
 
 @Composable
 fun EstateListScreen(
@@ -21,12 +20,15 @@ fun EstateListScreen(
     val state = viewModel.state//.value
 
     LazyColumn(modifier = Modifier.fillMaxSize()) {
-        items(state.estates) {
+        itemsIndexed(state.estates) { index, estate ->
             EstateCard(
-                estate = it,
+                estate = estate,
                 modifier = Modifier
                     .fillMaxSize()
-                    .clickable { navController.navigate(Screen.DetailScreen.withArgs(1L)) }
+                    .clickable {
+                        viewModel.onEstateClicked(index, estate)
+                        //navController.navigate(Screen.DetailScreen.withArgs(it.id))
+                    }
             )
         }
     }

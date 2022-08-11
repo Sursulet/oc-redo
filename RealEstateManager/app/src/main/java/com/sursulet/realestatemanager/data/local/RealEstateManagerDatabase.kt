@@ -5,8 +5,8 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
 @Database(
-    entities = [Estate::class, Photo::class],
-    views = [EstateItemView::class],
+    entities = [EstateDto::class, PhotoDto::class],
+    views = [EstateItemDto::class],
     version = 1,
     exportSchema = false
 )

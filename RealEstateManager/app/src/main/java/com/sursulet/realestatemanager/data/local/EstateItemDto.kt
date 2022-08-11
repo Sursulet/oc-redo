@@ -11,7 +11,7 @@ import androidx.room.DatabaseView
     LIMIT 1
     """
 )
-data class EstateItemView(
+data class EstateItemDto(
     val id: Long,
     val type: String,
     val city: String,

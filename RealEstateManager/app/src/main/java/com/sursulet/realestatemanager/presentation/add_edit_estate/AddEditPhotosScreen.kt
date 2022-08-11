@@ -11,8 +11,7 @@ import androidx.compose.material.icons.outlined.PhotoCamera
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.sursulet.realestatemanager.data.local.Photo
-import com.sursulet.realestatemanager.presentation.detail.components.PhotoCard
+import com.sursulet.realestatemanager.domain.model.Photo
 
 @Composable
 fun AddEditPhotosScreen(
@@ -23,7 +22,7 @@ fun AddEditPhotosScreen(
         Image(imageVector = Icons.Outlined.PhotoCamera, contentDescription = "")
         LazyRow {
             items(photos) { photo ->
-                PhotoCard(photo = photo)
+                //PhotoCard(photo = photo)
             }
         }
     }
@@ -35,12 +34,12 @@ fun AddEditPhotosScreenPreview() {
     AddEditPhotosScreen(
         photos = listOf(
             Photo(
-                id = 1, estateId = 1,
+                id = 1, //estateId = 1,
                 title = "Room",
                 image = Bitmap.createBitmap(200, 200, Bitmap.Config.RGB_565)
             ),
             Photo(
-                id = 1, estateId = 1,
+                id = 1, //estateId = 1,
                 title = "Room",
                 image = Bitmap.createBitmap(200, 200, Bitmap.Config.RGB_565)
             )

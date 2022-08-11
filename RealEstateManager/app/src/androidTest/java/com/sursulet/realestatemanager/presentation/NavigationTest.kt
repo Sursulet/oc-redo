@@ -1,20 +1,28 @@
 package com.sursulet.realestatemanager.presentation
 
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.performClick
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.sursulet.realestatemanager.domain.utils.Screen
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
+@HiltAndroidTest
 class NavigationTest {
 
     @get:Rule
-    val composeTestRule = createComposeRule()
+    val composeTestRule = createAndroidComposeRule<MainActivity>()//createComposeRule()
+
+    @get:Rule
+    val hiltRule = HiltAndroidRule(this)
+
     private lateinit var navController: NavHostController
 
     @Before
@@ -32,6 +40,13 @@ class NavigationTest {
     fun navigation() {
         composeTestRule
             .onNodeWithContentDescription(Screen.MainScreen.route)
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun navigateToAddScreen() {
+        composeTestRule
+            .onNodeWithContentDescription(Screen.MapScreen.route)
             .assertIsDisplayed()
     }
 

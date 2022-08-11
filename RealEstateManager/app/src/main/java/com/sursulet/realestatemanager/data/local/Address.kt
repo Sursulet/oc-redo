@@ -1,20 +1,18 @@
 package com.sursulet.realestatemanager.data.local
 
-import androidx.room.ColumnInfo
-
 data class Address(
-    val street: String? = null,
+    val street: String,
     val extras: String? = null,
-    val state: String? = null,
-    val city: String? = null,
-    @ColumnInfo(name = "post_code") val postCode: String? = null,
-    val country: String? = null
+    val state: String,
+    val city: String,
+    val zip: String,
+    val country: String
 ) {
     //private val stateCode: String = "$state $postCode"
 
     override fun toString(): String = listOfNotNull(
         street, extras.takeUnless { it.isNullOrEmpty() }, city,
-        "$state $postCode",
+        "$state $zip",
         country
     ).joinToString("\n")
 }

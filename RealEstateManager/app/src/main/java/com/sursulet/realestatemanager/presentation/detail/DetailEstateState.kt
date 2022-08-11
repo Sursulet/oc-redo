@@ -1,9 +1,9 @@
 package com.sursulet.realestatemanager.presentation.detail
 
-import com.sursulet.realestatemanager.domain.model.DetailData
+import com.sursulet.realestatemanager.domain.model.Estate
 
 data class DetailState(
-    val detailData: DetailData? = null,
+    val estate: Estate? = null,
     val isLoading: Boolean = false,
     val error: String? = null
 )

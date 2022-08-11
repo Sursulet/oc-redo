@@ -1,31 +1,47 @@
 package com.sursulet.realestatemanager.data.mappers
 
-import android.graphics.Bitmap
-import com.sursulet.realestatemanager.data.local.EstateItemView
+import com.sursulet.realestatemanager.data.local.EstateItemDto
 import com.sursulet.realestatemanager.data.local.EstateWithPhotos
-import com.sursulet.realestatemanager.domain.model.DetailData
-import com.sursulet.realestatemanager.domain.model.EstateData
-import java.text.NumberFormat
-import java.util.*
+import com.sursulet.realestatemanager.domain.model.Estate
+import com.sursulet.realestatemanager.domain.model.EstateItem
+import com.sursulet.realestatemanager.presentation.list.EstateItemUi
+import java.time.LocalDate
 
-fun EstateItemView.toEstateData(): EstateData {
-    return EstateData(
+fun EstateItemDto.toEstateItem(): EstateItem {
+    return EstateItem(
         id = id,
-        photo = Bitmap.createBitmap(16,16,Bitmap.Config.ARGB_8888),
+        photo = photo,
         type = type,
-        city = city,
-        price = NumberFormat.getNumberInstance(Locale.US).format(price)
+        price = price,
+        city = city
     )
 }
 
-fun EstateWithPhotos.toEstateDetailData(): DetailData {
-    return DetailData(
-        gallery = photos,
+fun EstateItem.toEstateItemUi(): EstateItemUi {
+    return EstateItemUi(
+        id = id,
+        photo = photo,
+        type = type,
+        price = price,
+        city = city
+    )
+}
+
+fun EstateWithPhotos.toEstate(): Estate {
+    return Estate(
+        photos = photos.map { it.toPhoto() },
+        type = estate.type,
+        price = estate.price,
+        surface = estate.surface,
+        rooms = estate.rooms,
+        bathrooms = estate.rooms,
+        bedrooms = estate.rooms,
         description = estate.description,
-        surface = estate.surface.toString(),
-        rooms = estate.rooms.toString(),
-        bathrooms = estate.rooms.toString(),
-        bedrooms = estate.rooms.toString(),
-        address = estate.address.toString()
+        address = estate.address,
+        nearby = estate.nearby,
+        isAvailable = estate.isAvailable,
+        created = LocalDate.now(),//estate.created,
+        saleTimestamp = LocalDate.now(),//estate.saleTimestamp,
+        agent = estate.agent
     )
 }
