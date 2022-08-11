@@ -1,6 +1,8 @@
 package com.sursulet.realestatemanager.di
 
 import android.app.Application
+import android.content.Context.CONNECTIVITY_SERVICE
+import android.net.ConnectivityManager
 import androidx.room.Room
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -47,4 +49,9 @@ object AppModule {
         return LocationServices.getFusedLocationProviderClient(application)
     }
 
+    @Provides
+    @Singleton
+    fun provideConnectivityManager(application: Application): ConnectivityManager {
+        return application.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+    }
 }
