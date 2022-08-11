@@ -1,7 +1,6 @@
 package com.sursulet.realestatemanager.presentation.add_edit_estate
 
 import android.graphics.Bitmap
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -9,21 +8,17 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sursulet.realestatemanager.data.local.Address
+import com.sursulet.realestatemanager.data.local.AddressDto
 import com.sursulet.realestatemanager.data.local.EstateDto
 import com.sursulet.realestatemanager.data.local.PhotoDto
-import com.sursulet.realestatemanager.data.mappers.toPhoto
-import com.sursulet.realestatemanager.data.mappers.toPhoto
 import com.sursulet.realestatemanager.data.mappers.toPhotoDto
 import com.sursulet.realestatemanager.di.IoDispatcher
-import com.sursulet.realestatemanager.domain.model.AddEditEstateUi
 import com.sursulet.realestatemanager.domain.repository.EstateRepository
 import com.sursulet.realestatemanager.domain.repository.PhotoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -65,7 +60,7 @@ class AddEditEstateViewModel @Inject constructor(
     private val _eventFlow = MutableSharedFlow<AddEditEstateEvent>()
     val eventFlow = _eventFlow.asSharedFlow()
 
-    var state by mutableStateOf(AddEditEstateUi())
+    var state by mutableStateOf(AddEditEstateState())
 
     init {
         /*
@@ -102,14 +97,14 @@ class AddEditEstateViewModel @Inject constructor(
                 surface = 27f,
                 rooms = 1,
                 description = "Description",
-                address = Address(
+                /*address = Address(
                     street = "760 Park Avenue",
                     extras = "Apt 6/7",
                     state = "NY",
                     city = "New York",
                     zip = "10021",
                     country = "UNITED STATES"
-                ),
+                ),*/
                 nearby = "school",
                 agent = "Peach"
             )
@@ -146,20 +141,22 @@ class AddEditEstateViewModel @Inject constructor(
                             surface = estateSurface.value.text.toFloat(),
                             rooms = estateRooms.value.text.toInt(),
                             description = estateDescription.value.text,
-                            address = Address(
-                                street = estateCity.value.text,
-                                extras = estateExtras.value.text,
-                                state = estateState.value.text,
-                                city = estateCity.value.text,
-                                zip = "null",
-                                country = estateCountry.value.text
-                            ),
                             nearby = "",
                             isAvailable = true,
                             agent = "",
                         )
 
-                        estateRepository.insert(newEstate)
+                        val newId = estateRepository.insert(newEstate)
+
+                        val newAddress = AddressDto(
+                            estateId = newId,
+                            street = estateCity.value.text,
+                            extras = estateExtras.value.text,
+                            state = estateState.value.text,
+                            city = estateCity.value.text,
+                            zip = "null",
+                            country = estateCountry.value.text
+                        )
                     } catch (e: Exception) {
                         _eventFlow.emit(
                             AddEditEstateEvent.ShowSnackBar(

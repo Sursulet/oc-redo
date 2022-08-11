@@ -18,7 +18,7 @@ fun AddressForm(
     state: String,
     zip: String,
 ) {
-    Column(){
+    Column {
         InputForm(
             text = street,
             modifier = Modifier.fillMaxWidth(),

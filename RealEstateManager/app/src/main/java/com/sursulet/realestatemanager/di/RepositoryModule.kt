@@ -1,8 +1,10 @@
 package com.sursulet.realestatemanager.di
 
+import com.sursulet.realestatemanager.data.repository.AddressRepositoryImpl
 import com.sursulet.realestatemanager.data.repository.EstateRepositoryImpl
 import com.sursulet.realestatemanager.data.repository.GeocodingRepositoryImpl
 import com.sursulet.realestatemanager.data.repository.PhotoRepositoryImpl
+import com.sursulet.realestatemanager.domain.repository.AddressRepository
 import com.sursulet.realestatemanager.domain.repository.EstateRepository
 import com.sursulet.realestatemanager.domain.repository.GeocodingRepository
 import com.sursulet.realestatemanager.domain.repository.PhotoRepository
@@ -32,6 +34,12 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindPhotoRepository(
-        estateRepositoryImpl: PhotoRepositoryImpl
+        photoRepositoryImpl: PhotoRepositoryImpl
     ): PhotoRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindAddressRepository(
+        addressRepositoryImpl: AddressRepositoryImpl
+    ): AddressRepository
 }

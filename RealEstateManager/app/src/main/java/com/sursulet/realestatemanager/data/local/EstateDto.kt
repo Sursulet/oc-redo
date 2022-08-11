@@ -15,7 +15,7 @@ data class EstateDto(
     val surface: Float,
     val rooms: Int,
     val description: String,
-    @Embedded val address: Address,
+    //@Embedded val address: Address,
     val nearby: String,
     val isAvailable: Boolean = true,
     val created: LocalDate = LocalDate.now(),

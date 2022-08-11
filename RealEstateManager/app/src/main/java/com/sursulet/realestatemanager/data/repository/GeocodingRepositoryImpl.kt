@@ -1,5 +1,7 @@
 package com.sursulet.realestatemanager.data.repository
 
+import com.google.android.gms.maps.model.LatLng
+import com.sursulet.realestatemanager.data.mappers.toLatLng
 import com.sursulet.realestatemanager.data.remote.GeocodingApi
 import com.sursulet.realestatemanager.domain.repository.GeocodingRepository
 import com.sursulet.realestatemanager.domain.utils.Resource
@@ -9,10 +11,10 @@ class GeocodingRepositoryImpl @Inject constructor(
     private val api: GeocodingApi
 ) : GeocodingRepository {
 
-    override suspend fun getCoordinates(address: String): Resource<String> {
+    override suspend fun getCoordinates(address: String): Resource<LatLng> {
         return try {
             Resource.Success(
-                data = api.getCoordinates(address = address).toString()
+                data = api.getCoordinates(address = address).toLatLng()
             )
         } catch (e: Exception) {
             e.printStackTrace()

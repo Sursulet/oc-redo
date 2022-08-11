@@ -5,9 +5,10 @@ import androidx.room.DatabaseView
 
 @DatabaseView(
     """
-    SELECT estate.id, estate.type, estate.city, estate.price, photo.image AS photo FROM estate
-    INNER JOIN photo
-    ON estate.id = photo.estateId
+    SELECT estate.id, estate.type, estate.price, address.city, photo.image AS photo 
+    FROM estate
+    INNER JOIN address ON estate.id = address.estateId
+    INNER JOIN photo ON estate.id = photo.estateId
     LIMIT 1
     """
 )

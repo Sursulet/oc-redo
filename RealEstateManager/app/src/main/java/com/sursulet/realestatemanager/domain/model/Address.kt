@@ -1,10 +1,11 @@
-package com.sursulet.realestatemanager.data.local
+package com.sursulet.realestatemanager.domain.model
 
 data class Address(
+    val estateId: Long,
     val street: String,
     val extras: String? = null,
-    val state: String,
     val city: String,
+    val state: String,
     val zip: String,
     val country: String
 ) {

@@ -26,7 +26,7 @@ fun AddEditScreen(
             .padding(16.dp)
     ) {
         Text(
-            text = "Created on ${state.created}",
+            text = "Created on $state",
             modifier = Modifier.fillMaxWidth(),
             color = Color.Gray,
             fontStyle = FontStyle.Italic,
@@ -34,7 +34,7 @@ fun AddEditScreen(
         )
 
         InputForm(
-            text = state.price.text,
+            text = "state.price.text",
             modifier = Modifier.fillMaxWidth(),
             label = "price",
             keyboardType = KeyboardType.Decimal

@@ -1,6 +1,5 @@
 package com.sursulet.realestatemanager.domain.model
 
-import com.sursulet.realestatemanager.data.local.Address
 import java.text.NumberFormat
 import java.time.LocalDate
 import java.util.*
@@ -18,7 +17,7 @@ data class Estate(
     val nearby: String,
     val isAvailable: Boolean,
     val created: LocalDate,
-    val saleTimestamp: LocalDate,
+    val saleTimestamp: LocalDate?,
     val agent: String
 ) {
     fun formattedPrice(): String = NumberFormat.getNumberInstance(Locale.US).format(price)

@@ -9,7 +9,7 @@ class PhotoRepositoryImpl @Inject constructor(
     database: RealEstateManagerDatabase
 ): PhotoRepository {
 
-    val dao = database.photoDao()
+    private val dao = database.photoDao()
 
     override suspend fun insert(photos: List<PhotoDto>) {
         dao.insert(photos)
