@@ -11,6 +11,18 @@ fun AddressDto.toAddress(): Address {
         city = city,
         state = state,
         zip = zip,
-        country = country,
+        country = country
+    )
+}
+
+fun Address.toAddressDto(): AddressDto {
+    return AddressDto(
+        estateId = estateId,
+        street = street,
+        extras = extras,
+        city = city,
+        state = state,
+        zip = zip,
+        country = country
     )
 }

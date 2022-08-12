@@ -37,10 +37,30 @@ class MapViewModel @Inject constructor(
                 error = null
             )
 
+            locationTracker.getCurrentLocation()?.let { location ->
+                when(val result = geocoder.getCoordinates("")) {
+                    is Resource.Error -> {
+                        state = state.copy(
+                            estates = emptyList(),
+                            isLoading = false,
+                            error = result.message
+                        )
+                    }
+                    is Resource.Success -> {
+                        val distance = location.distanceTo(result.data)
+                        state = state.copy(
+                            estates = emptyList(),
+                            isLoading = false,
+                            error = null
+                        )
+                    }
+                }
+            }
+            /*
             connectivityTracker.getCurrentConnectivity().collect { connectivity ->
                 connectivity.let { status ->
                     Log.d("PEACH", "loadMap: $status")
-                    state = state.copy(connectivity = status)
+                    //state = state.copy(connectivity = status)
                     when (status) {
                         ConnectivityTracker.Status.Available -> {
                             locationTracker.getCurrentLocation()?.let { location ->
@@ -73,6 +93,20 @@ class MapViewModel @Inject constructor(
                         }
                     }
                 }
+            }
+
+             */
+        }
+    }
+
+    fun onAction(action: MapAction) {
+        when (action) {
+            is MapAction.ToggleFalloutMap -> {}
+            is MapAction.OnInfoWindowLongClick -> {
+                viewModelScope.launch {}
+            }
+            is MapAction.OnMapLongClick -> {
+                viewModelScope.launch {  }
             }
         }
     }

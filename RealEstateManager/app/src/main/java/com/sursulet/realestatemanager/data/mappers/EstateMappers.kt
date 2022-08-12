@@ -29,18 +29,18 @@ fun EstateItem.toEstateItemUi(): EstateItemUi {
 fun EstateWithPhotos.toEstate(): Estate {
     return Estate(
         photos = photos.map { it.toPhoto() },
-        type = estate.estate.type,
-        price = estate.estate.price,
-        surface = estate.estate.surface,
-        rooms = estate.estate.rooms,
-        bathrooms = estate.estate.rooms,
-        bedrooms = estate.estate.rooms,
-        description = estate.estate.description,
+        type = estate.features.type,
+        price = estate.features.price,
+        surface = estate.features.surface,
+        rooms = estate.features.rooms,
+        bathrooms = estate.features.rooms,
+        bedrooms = estate.features.rooms,
+        description = estate.features.description,
         address = estate.address.toAddress(),
-        nearby = estate.estate.nearby,
-        isAvailable = estate.estate.isAvailable,
-        created = estate.estate.created,
-        saleTimestamp = estate.estate.saleTimestamp,
-        agent = estate.estate.agent
+        nearby = estate.features.nearby,
+        isAvailable = estate.features.isAvailable,
+        created = estate.features.created,
+        saleTimestamp = estate.features.saleTimestamp,
+        agent = estate.features.agent
     )
 }

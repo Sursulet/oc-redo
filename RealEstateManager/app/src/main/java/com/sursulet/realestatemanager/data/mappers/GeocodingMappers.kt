@@ -1,5 +1,6 @@
 package com.sursulet.realestatemanager.data.mappers
 
+import android.location.Location
 import com.google.android.gms.maps.model.LatLng
 import com.sursulet.realestatemanager.data.remote.dto.GeocodingDto
 import com.sursulet.realestatemanager.data.remote.dto.GeometryDto
@@ -7,11 +8,8 @@ import com.sursulet.realestatemanager.domain.model.Geocoding
 import com.sursulet.realestatemanager.domain.model.Geometry
 
 
-fun GeocodingDto.toLatLng(): LatLng {
-    return LatLng(
-        geometry.location.lat,
-        geometry.location.lng
-    )
+fun GeocodingDto.toLatLng(): Location {
+    return geometry.location
 }
 
 fun GeocodingDto.toGeocoding(): Geocoding {

@@ -1,9 +1,12 @@
 package com.sursulet.realestatemanager.data.repository
 
-import com.sursulet.realestatemanager.data.local.AddressDto
 import com.sursulet.realestatemanager.data.local.RealEstateManagerDatabase
+import com.sursulet.realestatemanager.data.mappers.toAddress
+import com.sursulet.realestatemanager.data.mappers.toAddressDto
+import com.sursulet.realestatemanager.domain.model.Address
 import com.sursulet.realestatemanager.domain.repository.AddressRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class AddressRepositoryImpl @Inject constructor(
@@ -11,11 +14,11 @@ class AddressRepositoryImpl @Inject constructor(
 ) : AddressRepository {
     private val dao = database.addressDao()
 
-    override suspend fun insert(address: AddressDto) {
-        TODO("Not yet implemented")
+    override suspend fun insert(address: Address) {
+        dao.insert(address.toAddressDto())
     }
 
-    override suspend fun update(address: AddressDto) {
+    override suspend fun update(address: Address) {
         TODO("Not yet implemented")
     }
 
@@ -23,7 +26,9 @@ class AddressRepositoryImpl @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override fun getAddresses(): Flow<List<AddressDto>> {
-        return dao.getAddresses()
+    override fun getAddresses(): Flow<List<Address>> {
+        return dao.getAddresses().map { addresses ->
+            addresses.map { it.toAddress() }
+        }
     }
 }
