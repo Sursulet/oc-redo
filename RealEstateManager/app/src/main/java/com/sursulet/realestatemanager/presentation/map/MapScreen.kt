@@ -54,7 +54,7 @@ fun MapScreen(
         MapUiSettings(zoomControlsEnabled = false)
     }
 
-    Column {
+    /*Column {
         Text(text = "Map Screen")
         Log.d("peach", "MapScreen: IN MAP SCREEN COLUMN")
 
@@ -64,7 +64,7 @@ fun MapScreen(
         //Text(text = navController.graph.startDestDisplayName)
         //navController.currentDestination?.let { it.route?.let { it1 -> Text(text = it1) } }
         //navController.currentDestination?.let { Text(text = it.navigatorName) }
-    }
+    }*/
 
     GoogleMap(
         modifier = Modifier.fillMaxSize(),

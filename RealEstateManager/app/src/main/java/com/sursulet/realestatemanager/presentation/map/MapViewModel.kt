@@ -47,7 +47,7 @@ class MapViewModel @Inject constructor(
                         )
                     }
                     is Resource.Success -> {
-                        val distance = location.distanceTo(result.data)
+                        //val distance = location.distanceTo(result.data)
                         state = state.copy(
                             estates = emptyList(),
                             isLoading = false,
