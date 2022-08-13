@@ -11,9 +11,9 @@ data class Address(
 ) {
     //private val stateCode: String = "$state $postCode"
 
-    override fun toString(): String = listOfNotNull(
+    fun toString(separator: String): String = listOfNotNull(
         street, extras.takeUnless { it.isNullOrEmpty() }, city,
         "$state $zip",
         country
-    ).joinToString("\n")
+    ).joinToString(separator)
 }

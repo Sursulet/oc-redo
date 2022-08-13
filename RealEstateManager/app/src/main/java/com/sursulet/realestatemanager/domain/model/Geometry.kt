@@ -4,5 +4,5 @@ import android.location.Location
 import com.sursulet.realestatemanager.data.remote.dto.LocationDto
 
 data class Geometry(
-    val location: Location
+    val location: LocationDto
 )

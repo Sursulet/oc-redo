@@ -14,7 +14,7 @@ class EstateTest {
             id = 1,
             type = "Castle", price = 1000500f, surface = 27f,
             rooms = 1, description = "description",
-            address = Address(street = "16 rue ", "null", "null", "null", zip = "23", ""),
+            //address = Address(street = "16 rue ", "null", "null", "null", zip = "23", ""),
             nearby = "school, market",
             agent = ""
         )

@@ -1,6 +1,6 @@
 package com.sursulet.realestatemanager.data.repository
 
-import android.location.Location
+import android.util.Log
 import com.google.android.gms.maps.model.LatLng
 import com.sursulet.realestatemanager.data.mappers.toLatLng
 import com.sursulet.realestatemanager.data.remote.GeocodingApi
@@ -12,10 +12,12 @@ class GeocodingRepositoryImpl @Inject constructor(
     private val api: GeocodingApi
 ) : GeocodingRepository {
 
-    override suspend fun getCoordinates(address: String): Resource<Location> {
+    override suspend fun getCoordinates(address: String): Resource<LatLng> {
+        val data = api.getCoordinates(address = address)
+        Log.d("mappy", "getCoordinates: address = $address /// ${data.results[0]}")
         return try {
             Resource.Success(
-                data = api.getCoordinates(address = address).toLatLng()
+                data = data.toLatLng()
             )
         } catch (e: Exception) {
             e.printStackTrace()

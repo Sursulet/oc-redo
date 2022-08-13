@@ -6,11 +6,12 @@ import org.junit.Test
 
 class AddressTest {
 
-    private lateinit var address: Address
+    private lateinit var address: AddressDto
 
     @Before
     fun setUp() {
-        address = Address(
+        address = AddressDto(
+            estateId = 1L,
             street = "760 Park Avenue",
             extras = "Apt 6/7",
             state = "NY",

@@ -4,9 +4,7 @@ import android.Manifest
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -14,10 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.maps.android.compose.GoogleMap
-import com.google.maps.android.compose.MapUiSettings
-import com.google.maps.android.compose.Marker
-import com.google.maps.android.compose.MarkerState
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.*
+import com.sursulet.realestatemanager.domain.model.Address
 
 @Composable
 fun MapScreen(
@@ -30,6 +27,7 @@ fun MapScreen(
         when {
             permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
                 Log.d("peach", "MapScreen: isGRANTED")
+                //viewModel.isConnected()
             }
             permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
                 Log.d("peach", "MapScreen: YEH!YEH! isGRANTED")
@@ -54,6 +52,7 @@ fun MapScreen(
         MapUiSettings(zoomControlsEnabled = false)
     }
 
+
     /*Column {
         Text(text = "Map Screen")
         Log.d("peach", "MapScreen: IN MAP SCREEN COLUMN")
@@ -74,7 +73,7 @@ fun MapScreen(
     ) {
         viewModel.state.estates.forEach { estate ->
             Marker(
-                state = MarkerState(),
+                state = MarkerState(position = estate),
                 onClick = {
                     it.showInfoWindow()
                     true

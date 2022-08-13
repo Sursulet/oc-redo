@@ -14,7 +14,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.time.LocalDate
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
@@ -44,14 +43,14 @@ class EstateDaoTest {
 
     @Test
     fun insertEstate() = runTest {
-        val item = Estate(
+        val item = EstateDto(
             id = 1,
             type = "",
             price = 1f,
             surface = 27f,
             rooms = 1,
             description = "",
-            address = Address("","","","","",""),
+            //address = Address("","","","","",""),
             nearby = "",
             isAvailable = true,
             //created = LocalDate.now(),
@@ -68,26 +67,26 @@ class EstateDaoTest {
 
     @Test
     fun getEstates() = runTest {
-        val item = Estate(
+        val item = EstateDto(
             type = "",
             price = 1f,
             surface = 27f,
             rooms = 1,
             description = "",
-            address = Address("","","","","",""),
+            //address = Address("","","","","",""),
             nearby = "",
             isAvailable = true,
             //created = LocalDate.now(),
             //saleTimestamp = null,
             agent = ""
         )
-        val item1 = Estate(
+        val item1 = EstateDto(
             type = "",
             price = 1f,
             surface = 27f,
             rooms = 1,
             description = "",
-            address = Address("","","","","",""),
+            //address = Address("","","","","",""),
             nearby = "",
             isAvailable = true,
             //created = LocalDate.now(),
@@ -107,14 +106,14 @@ class EstateDaoTest {
 
     @Test
     fun update() = runTest {
-        val item = Estate(
+        val item = EstateDto(
             id = 1,
             type = "",
             price = 1f,
             surface = 27f,
             rooms = 1,
             description = "",
-            address = Address("","","","","",""),
+            //address = Address("","","","","",""),
             nearby = "",
             isAvailable = true,
             //created = LocalDate.now(),

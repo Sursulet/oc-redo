@@ -1,6 +1,7 @@
 package com.sursulet.realestatemanager.presentation.add_edit_estate
 
 import android.graphics.Bitmap
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -13,6 +14,8 @@ import com.sursulet.realestatemanager.data.local.EstateDto
 import com.sursulet.realestatemanager.data.local.PhotoDto
 import com.sursulet.realestatemanager.data.mappers.toPhotoDto
 import com.sursulet.realestatemanager.di.IoDispatcher
+import com.sursulet.realestatemanager.domain.model.Address
+import com.sursulet.realestatemanager.domain.repository.AddressRepository
 import com.sursulet.realestatemanager.domain.repository.EstateRepository
 import com.sursulet.realestatemanager.domain.repository.PhotoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,7 +30,8 @@ class AddEditEstateViewModel @Inject constructor(
     @IoDispatcher dispatcher: CoroutineDispatcher,
     savedStateHandle: SavedStateHandle,
     private val estateRepository: EstateRepository,
-    private val photoRepository: PhotoRepository
+    private val photoRepository: PhotoRepository,
+    private val addressRepository: AddressRepository
 ) : ViewModel() {
 
     private val _estateType = mutableStateOf(EstateTextFieldState())
@@ -97,19 +101,13 @@ class AddEditEstateViewModel @Inject constructor(
                 surface = 27f,
                 rooms = 1,
                 description = "Description",
-                /*address = Address(
-                    street = "760 Park Avenue",
-                    extras = "Apt 6/7",
-                    state = "NY",
-                    city = "New York",
-                    zip = "10021",
-                    country = "UNITED STATES"
-                ),*/
                 nearby = "school",
                 agent = "Peach"
             )
 
             val newId = estateRepository.insert(estate)
+            Log.d("peach", "NEW ID: $newId")
+
             val photo = PhotoDto(
                 estateId = newId,
                 title = "Room",
@@ -122,6 +120,18 @@ class AddEditEstateViewModel @Inject constructor(
             )
 
             photoRepository.insert(listOf(photo, photo1))
+
+            val newAddress = Address(
+                estateId = newId,
+                street = "760 Park Avenue",
+                extras = "Apt 6/7",
+                state = "NY",
+                city = "New York",
+                zip = "10021",
+                country = "UNITED STATES"
+            )
+
+            addressRepository.insert(newAddress)
         }
     }
 
